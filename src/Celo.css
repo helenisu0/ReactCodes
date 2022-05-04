@@ -1,0 +1,65 @@
+*{
+    font-family: 'Libre Baskerville', serif;
+}
+
+.celo-container{
+    width:100vw;
+    height:100vh;
+    background-color:white;
+}
+
+.celo-header{
+    background-color:white;
+    height: 10%;
+    width: 100%;
+    padding: 4%;
+    justify-content: space-between;
+}
+.celo-navbar{
+    margin-top: -4%;
+    display: flex;
+    justify-content: space-between;
+    width:20%;
+    align-items: center;
+    margin-left: 25em;
+    color:white;
+    gap:3%;
+    padding-top: 1%;
+}
+
+.celo-header img{
+    margin-top:1%
+}
+
+.middle-container{
+    padding-top: 4%;
+    padding-left: 24%;
+    padding-right: 24%;
+    align-items: center;
+    justify-content: center;
+    display:grid;
+    grid-auto-rows: auto;
+    flex-direction: row;
+    
+}
+
+.middle-container h4{
+    line-height: 1.2;
+    font-size:24px;
+    max-width: 320px;
+    font-family: EB Garamond,eb-garamond,Garamond,serif;
+    margin:0 0 20px;
+}
+
+.middle-container b{
+    font-size: 28px;
+}
+
+a:link{
+    color:black;
+}
+
+.middle-div{
+    display: flex;
+    flex-direction: row;
+}

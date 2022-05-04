@@ -1,0 +1,69 @@
+.budgetBalance{
+    background-color: blueviolet;
+    width:97%;
+    align-items: center;
+    padding: 2% 1.5%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display:flex;
+    justify-content: space-between;
+
+}
+
+.balance{
+    background-color:rgba(116, 8,218);
+    color: white;
+    border-radius: 5px;
+    height:5vh;
+    width:15%;
+    font-size: 14px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-weight: bold;
+
+}
+
+.balance-button{
+    width:50%;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.balance-button input{
+    height:5vh;
+    width: 60%;
+    border-radius:4px;
+    background-color: #4b0090;
+    border:unset;
+    padding: 0 10px;
+}
+
+.balance-button input:focus-visible{
+    outline: unset;
+    background-color:white;
+    color:#4b0090;
+
+}
+
+.balance-button button{
+    outline:unset;
+    border:none;
+    padding:1.8%;
+    background-color:white;
+    color:#4b0090;
+    border-radius:4px;
+    font-size:12px;
+    font-weight: bold;
+
+}
+
+.balance-dropdown{
+    height: 2.5em;
+    width: 4rem;
+    border: unset;
+    border-radius: 3px;
+    padding: 4px;
+    color: #4b0090;
+    font-weight: bold;
+}
