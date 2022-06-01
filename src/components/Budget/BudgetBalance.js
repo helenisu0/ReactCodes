@@ -1,53 +1,78 @@
-// import React, {useEffect, useState} from 'react'
-// import "./BudgetBalance.css"
+import React, {useEffect, useState} from 'react'
+import "./BudgetBalance.css"
 // import {useSelector} from "react-redux"
-// import axios from "axios"
+import axios from "axios"
+import {useHistory} from 'react-router-dom'
 
 
 
-// const BudgetBalance = (props) => {
-//     const[input, setInput] = useState(false)
-//     const handleInput = (e) =>{
-//         setInput(e.target.value)
+const BudgetBalance = (props) => {
+    const[input, setInput] = useState(0)
+    const[exchangeRate, setExchangeRate] = useState({})
+    const[selectOption, setSelectOption] = useState("")
+    
+    let { budget, setSelectOpt } = props
+
+    let  history = useHistory()
+    
+    
+    const handleInput = (e) =>{
+        setInput(e.target.value)
         
-//     }
-//     const{budgetAmount} = useSelector(state => state.budgetReducer)
+    }
+    // const{budgetAmount} = useSelector(state => state.budgetReducer)
 
-//     useEffect(()=>{
-//       fetch("https://v6.exchangerate-api.com/v6/a422a186bdc3c5f569e373ac/latest/USD").then(
-//         (data)=>data.json()
-//       ).then((data => console.log(data))
-//       )
-//     }, [])
+    const handleSelect = (e)=>{
+        console.log(exchangeRate[e.target.value])
+        selectOption === "" ?
+            props.setBalance(props.balance * exchangeRate[e.target.valueOf]) :
+            props.setBalance(props.balance / exchangeRate[selectOption] * exchangeRate[e.target.value])
+        setSelectOpt(e.target.value)
 
-//     useEffect( ()=>{
-//       console.log("i just mounted @ Budget Balance")
-//       return()=>{
-//         console.log("i just unmounted @ Budget Balance")
-//       }
-//     }, [props.balance])
+        for(let i = 0; i < budget.length; i++){
+            budget[i]["budgetAmount"] = budget[i]["budgetAmount"] / exchangeRate[selectOption] * exchangeRate[e.target.value]
+        }
 
-//   return (
-//     <div className="budgetBalance">
+        setSelectOption(e.target.value)
 
-//     <div className="balance"> 
-//         {budgetAmount}
-//     </div>
-//     <select className="balance-dropdown" onChange={handleSelect}>
-//                 {Object.keys(exchangeRate).length > 0 &&
-//                 Object.keys(exchangeRate).map(
-//                     (data, index) => <option key={index}>{data}</option>
-//                 )}
-//             </select>
-//     <div className="balance-button">
-//     <input onChange={handleInput}/>
-//     <button onClick = {() => props.setBalance(input)}>Update Balance</button>
+    }
 
 
 
-//     </div>
-//     </div>
-//   )
-// }
+    useEffect(()=>{
+        axios.get('https://v6.exchangerate-api.com/v6/8f58fa831aa1c2654d0d26a0/latest/NGN')
+            .then((response)=>
+            {setExchangeRate(response.data.conversion_rates)
+                setSelectOption(Object.keys(response.data.conversion_rates)[0])
+            })
+    },[])
 
-// export default BudgetBalance
+    useEffect(()=>{
+        console.log('mounted @ budget balance')
+        return()=>{
+            console.log('unmounted @ budget balance')
+        }
+    },[props.balance])
+
+  return (
+        <div className="budgetBalance">
+            <div className="balance">
+                {props.balance}
+            </div>
+            <select className="balance-dropdown" onChange = {handleSelect}>
+                {Object.keys(exchangeRate).length>0 &&
+                Object.keys(exchangeRate).map(
+                    (data, index)=><option key={index}>{data}</option>)}
+            </select>
+            <div className="balance-buttons">
+                <input type="number" onChange={handleInput}/>
+                <button onClick={()=> props.setBalance(input)}>Set Budget</button>
+            </div>
+            <div className="balance-button">
+                {/* <button onClick={()=> signOut()}>Sign Out</button> */}
+            </div>
+        </div>
+    );
+}
+
+export default BudgetBalance

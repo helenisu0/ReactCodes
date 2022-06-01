@@ -19,26 +19,23 @@ function App() {
 
 
 
-return(
+      return(
       <Provider store={store}>
-<div className="app-container">
+      <div className="app-container">
       {/* <Budget/> */}
       {/* <Celo/> */}
-      <Router>
-            <Switch>
-                  <Route exact path="/">
-                  <Authentication setCustomerName={setCustomerName} />  
+            <Router>
+                  <Switch>
+                        <Route exact path="/">
+                              <Authentication setCustomerName={setCustomerName} />  
+                        </Route>
 
-                  </Route>
-
-                  <Route path="/dashboard">
-                        <Budget customerName={customerName}/>
-
-                  </Route>
-            </Switch>
-      
-      </Router>
-</div>
+                        <Route path="/dashboard">
+                              <Budget customerName={customerName}/>
+                        </Route>
+                  </Switch>
+            </Router>
+      </div>
 </Provider>
 
 )
